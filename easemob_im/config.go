@@ -15,10 +15,6 @@ type AgoraConfig struct {
 }
 
 var (
-	DefaultEaseMobConfig = &EaseMobConfig{
-		AppKey:       "",
-		ClientID:     "",
-		ClientSecret: "",
-	}
-	DefaultAgoraConfig = &EaseMobConfig{}
+	DefaultEaseMobConfig = &EaseMobConfig{}
+	DefaultAgoraConfig   = &AgoraConfig{}
 )

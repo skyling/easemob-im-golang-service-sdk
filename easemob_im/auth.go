@@ -35,7 +35,7 @@ func NewAuth(appKey, clientIDOrAppID, clientSecretOrAppCertificate string, isAgo
 		orgName:             temp[0],
 		appName:             temp[1],
 		appKey:              appKey,
-		expireTimeInSeconds: 2592000,
+		expireTimeInSeconds: 259200,
 		isAgora:             isAgora,
 	}
 	if isAgora {
@@ -235,6 +235,7 @@ func (s *Auth) agoraToken2EaseMobToken() string {
 	}
 	res := types.AccessTokenResp{}
 	err := HttpPost(uri, body, &res, headers)
+	fmt.Println(err, agoraToken)
 	if err != nil {
 		return ""
 	}

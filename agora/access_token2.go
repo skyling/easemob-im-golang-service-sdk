@@ -2,7 +2,7 @@ package agora
 
 import (
 	"encoding/base64"
-	"math/rand"
+	"fmt"
 	"regexp"
 	"strings"
 	"time"
@@ -24,11 +24,12 @@ type AccessToken2 struct {
 
 func NewAccessToken2(appID, appCert string, expire int64) *AccessToken2 {
 	return &AccessToken2{
-		appID:   appID,
-		appCert: appCert,
-		expire:  expire,
-		issueTs: time.Now().Unix(),
-		salt:    rand.Int(),
+		appID:    appID,
+		appCert:  appCert,
+		expire:   expire,
+		issueTs:  time.Now().Unix(),
+		salt:     RandNumber(1, 999999999),
+		services: map[uint16]Servicer{},
 	}
 }
 
@@ -37,10 +38,11 @@ func (s *AccessToken2) AddService(service Servicer) {
 }
 
 func (s *AccessToken2) Build() string {
-	if !s.isUUID(s.appID) || s.isUUID(s.appCert) {
+	if !s.isUUID(s.appID) || !s.isUUID(s.appCert) {
 		return ""
 	}
 	signKey := s.getSign()
+
 	data := PackString(s.appID)
 	data = append(data, PackUint32(uint32(s.issueTs))...)
 	data = append(data, PackUint32(uint32(s.expire))...)
@@ -54,6 +56,7 @@ func (s *AccessToken2) Build() string {
 	sign := HmacSha256(signKey, data)
 	signData := PackString(string(sign))
 	signData = append(signData, data...)
+	fmt.Printf("data====%0x %0x %d", ZlibEncode(signData), PackUint32(uint32(s.expire)), s.expire)
 	return Version + base64.StdEncoding.EncodeToString(ZlibEncode(signData))
 }
 

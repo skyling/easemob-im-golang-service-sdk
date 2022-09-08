@@ -6,7 +6,7 @@ type ServiceFpa struct {
 
 func NewServiceFpa(userID string) *ServiceFpa {
 	return &ServiceFpa{
-		Service: Service{Type: ServiceTypeFpa},
+		Service: Service{Type: ServiceTypeFpa, Privileges: map[uint16]uint32{}},
 	}
 }
 

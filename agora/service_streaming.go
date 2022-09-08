@@ -8,7 +8,7 @@ type ServiceStreaming struct {
 
 func NewServiceStreaming(channelName, uid string) *ServiceStreaming {
 	return &ServiceStreaming{
-		Service:     Service{Type: ServiceTypeRtc},
+		Service:     Service{Type: ServiceTypeRtc, Privileges: map[uint16]uint32{}},
 		ChannelName: channelName,
 		UID:         uid,
 	}

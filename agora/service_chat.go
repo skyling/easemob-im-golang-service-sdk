@@ -7,7 +7,7 @@ type ServiceChat struct {
 
 func NewServiceChat(userID string) *ServiceChat {
 	return &ServiceChat{
-		Service: Service{Type: ServiceTypeChat},
+		Service: Service{Type: ServiceTypeChat, Privileges: map[uint16]uint32{}},
 		UserID:  userID,
 	}
 }

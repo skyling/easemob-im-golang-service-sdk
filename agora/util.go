@@ -7,7 +7,9 @@ import (
 	"crypto/sha256"
 	"encoding/binary"
 	"io"
+	"math/rand"
 	"sort"
+	"time"
 )
 
 func PackUint16(n uint16) []byte {
@@ -96,4 +98,9 @@ func ZlibDecode(src []byte) []byte {
 	deBuffer := new(bytes.Buffer)
 	io.Copy(deBuffer, read)
 	return deBuffer.Bytes()
+}
+
+func RandNumber(min, max int) int {
+	rand.Seed(time.Now().UnixNano())
+	return rand.Intn(max-min) + min
 }

@@ -8,7 +8,7 @@ type ServiceRtc struct {
 
 func NewServiceRtc(channelName, uid string) *ServiceRtc {
 	return &ServiceRtc{
-		Service:     Service{Type: ServiceTypeRtc},
+		Service:     Service{Type: ServiceTypeRtc, Privileges: map[uint16]uint32{}},
 		ChannelName: channelName,
 		UID:         uid,
 	}

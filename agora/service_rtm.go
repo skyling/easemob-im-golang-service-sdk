@@ -7,7 +7,7 @@ type ServiceRtm struct {
 
 func NewServiceRtm(userID string) *ServiceRtm {
 	return &ServiceRtm{
-		Service: Service{Type: ServiceTypeRtm},
+		Service: Service{Type: ServiceTypeRtm, Privileges: map[uint16]uint32{}},
 		UserID:  userID,
 	}
 }
