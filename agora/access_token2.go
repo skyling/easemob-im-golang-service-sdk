@@ -2,7 +2,6 @@ package agora
 
 import (
 	"encoding/base64"
-	"fmt"
 	"regexp"
 	"strings"
 	"time"
@@ -56,7 +55,6 @@ func (s *AccessToken2) Build() string {
 	sign := HmacSha256(signKey, data)
 	signData := PackString(string(sign))
 	signData = append(signData, data...)
-	fmt.Printf("data====%0x %0x %d", ZlibEncode(signData), PackUint32(uint32(s.expire)), s.expire)
 	return Version + base64.StdEncoding.EncodeToString(ZlibEncode(signData))
 }
 
