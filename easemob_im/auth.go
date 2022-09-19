@@ -235,7 +235,6 @@ func (s *Auth) agoraToken2EaseMobToken() string {
 	}
 	res := types.AccessTokenResp{}
 	err := HttpPost(uri, body, &res, headers)
-	fmt.Println(err, agoraToken)
 	if err != nil {
 		return ""
 	}
