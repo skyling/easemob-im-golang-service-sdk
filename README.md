@@ -34,3 +34,4 @@ go get github.com/skyling/easemob-im-golang-service-sdk
 - [ ] 聊天室
 - [ ] 在线状态订阅
 - [ ] 消息表情恢复
+- [x] 即时推送
