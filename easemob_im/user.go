@@ -39,7 +39,7 @@ func (u *User) Get(username string) (*types.UserEntity, error) {
 	}
 	uri := u.auth.BuildURI("/users/" + username)
 	var res types.UserListResp
-	err := HttpGet(uri, &res)
+	err := HttpGet(uri, &res, u.auth.Headers())
 	if err != nil {
 		return nil, err
 	}
@@ -139,7 +139,7 @@ func (u *User) ForceLogoutAllDevices(username string) (bool, error) {
 	}
 	uri := u.auth.BuildURI(fmt.Sprintf("/users/%s/disconnect", username))
 	var res types.UserResultResp
-	err := HttpGet(uri, &res)
+	err := HttpGet(uri, &res, u.auth.Headers())
 	if err != nil {
 		return false, err
 	}
@@ -153,7 +153,7 @@ func (u *User) UserStatus(username string) (bool, error) {
 	}
 	uri := u.auth.BuildURI(fmt.Sprintf("/users/%s/status", username))
 	var res types.UserStatusResp
-	err := HttpGet(uri, &res)
+	err := HttpGet(uri, &res, u.auth.Headers())
 	if err != nil {
 		return false, err
 	}
